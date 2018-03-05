@@ -2,6 +2,8 @@
 
 namespace TraderInteractive\Filter;
 
+use TraderInteractive\Exceptions\FilterException;
+
 /**
  * A collection of filters for integers.
  */
@@ -15,24 +17,21 @@ final class Ints
      *
      * The return value is the int, as expected by the \TraderInteractive\Filterer class.
      *
-     * @param string|int $value the value to make an integer
-     * @param bool $allowNull Set to true if NULL values are allowed. The filtered result of a NULL value is NULL
-     * @param int $minValue The minimum acceptable value
-     * @param int $maxValue The maximum acceptable value
+     * @param string|int $value     the value to make an integer
+     * @param bool       $allowNull Set to true if NULL values are allowed. The filtered result of a NULL value is NULL
+     * @param int        $minValue  The minimum acceptable value
+     * @param int        $maxValue  The maximum acceptable value
      *
      * @return int|null The filtered value
      *
-     * @throws \InvalidArgumentException if $allowNull is not a boolean
-     * @throws \InvalidArgumentException if $minValue is not null and not an int
-     * @throws \InvalidArgumentException if $maxValue is not an int
-     * @throws Exception if $value string length is zero
-     * @throws Exception if $value does not contain all digits, optionally prepended by a '+' or '-' and optionally
-     *                    surrounded by whitespace
-     * @throws Exception if $value was greater than a max int of PHP_INT_MAX
-     * @throws Exception if $value was less than a min int of ~PHP_INT_MAX
-     * @throws Exception if $value is not a string
-     * @throws Exception if $value is less than $minValue
-     * @throws Exception if $value is greater than $maxValue
+     * @throws FilterException if $value string length is zero
+     * @throws FilterException if $value does not contain all digits, optionally prepended by a '+' or '-' and
+     *                         optionally surrounded by whitespace
+     * @throws FilterException if $value was greater than a max int of PHP_INT_MAX
+     * @throws FilterException if $value was less than a min int of ~PHP_INT_MAX
+     * @throws FilterException if $value is not a string
+     * @throws FilterException if $value is less than $minValue
+     * @throws FilterException if $value is greater than $maxValue
      */
     public static function filter($value, bool $allowNull = false, int $minValue = null, int $maxValue = PHP_INT_MAX)
     {
@@ -47,7 +46,7 @@ final class Ints
             $value = trim($value);
 
             if (strlen($value) === 0) {
-                throw new Exception('$value string length is zero');
+                throw new FilterException('$value string length is zero');
             }
 
             $stringToCheckDigits = $value;
@@ -57,7 +56,7 @@ final class Ints
             }
 
             if (!ctype_digit($stringToCheckDigits)) {
-                throw new Exception(
+                throw new FilterException(
                     "{$value} does not contain all digits, optionally prepended by a '+' or '-' and optionally "
                     . "surrounded by whitespace"
                 );
@@ -68,24 +67,24 @@ final class Ints
             $casted = (int)$value;
 
             if ($casted === PHP_INT_MAX && $value !== (string)PHP_INT_MAX) {
-                throw new Exception("{$value} was greater than a max int of " . PHP_INT_MAX);
+                throw new FilterException("{$value} was greater than a max int of " . PHP_INT_MAX);
             }
 
             if ($casted === $phpIntMin && $value !== (string)$phpIntMin) {
-                throw new Exception("{$value} was less than a min int of {$phpIntMin}");
+                throw new FilterException("{$value} was less than a min int of {$phpIntMin}");
             }
 
             $valueInt = $casted;
         } else {
-            throw new Exception('"' . var_export($value, true) . '" $value is not a string');
+            throw new FilterException('"' . var_export($value, true) . '" $value is not a string');
         }
 
         if ($minValue !== null && $valueInt < $minValue) {
-            throw new Exception("{$valueInt} is less than {$minValue}");
+            throw new FilterException("{$valueInt} is less than {$minValue}");
         }
 
         if ($valueInt > $maxValue) {
-            throw new Exception("{$valueInt} is greater than {$maxValue}");
+            throw new FilterException("{$valueInt} is greater than {$maxValue}");
         }
 
         return $valueInt;

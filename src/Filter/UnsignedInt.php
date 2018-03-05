@@ -2,6 +2,8 @@
 
 namespace TraderInteractive\Filter;
 
+use TraderInteractive\Exceptions\FilterException;
+
 /**
  * A collection of filters for unsigned integers.
  */
@@ -19,7 +21,8 @@ final class UnsignedInt
      *
      * @return int|null
      *
-     * @throws Exception
+     * @throws \InvalidArgumentException if minvalue is not greater or equal to zero.
+     * @throws FilterException on failure to filter.
      */
     public static function filter($value, bool $allowNull = false, int $minValue = null, int $maxValue = PHP_INT_MAX)
     {

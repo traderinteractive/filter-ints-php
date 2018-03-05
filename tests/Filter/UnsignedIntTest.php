@@ -32,7 +32,7 @@ final class UnsignedIntTest extends TestCase
     /**
      * @test
      * @covers ::filter
-     * @expectedException \TraderInteractive\Filter\Exception
+     * @expectedException \TraderInteractive\Exceptions\FilterException
      * @expectedExceptionMessage -1 is less than 0
      */
     public function filterMinValueNullFail()
@@ -61,7 +61,7 @@ final class UnsignedIntTest extends TestCase
     /**
      * @test
      * @covers ::filter
-     * @expectedException \TraderInteractive\Filter\Exception
+     * @expectedException \TraderInteractive\Exceptions\FilterException
      * @expectedExceptionMessage "NULL" $value is not a string
      */
     public function filterAllowNullFail()
@@ -72,7 +72,7 @@ final class UnsignedIntTest extends TestCase
     /**
      * @test
      * @covers ::filter
-     * @expectedException \TraderInteractive\Filter\Exception
+     * @expectedException \TraderInteractive\Exceptions\FilterException
      * @expectedExceptionMessage 0 is less than 1
      */
     public function filterMinValueFail()
@@ -83,7 +83,7 @@ final class UnsignedIntTest extends TestCase
     /**
      * @test
      * @covers ::filter
-     * @expectedException \TraderInteractive\Filter\Exception
+     * @expectedException \TraderInteractive\Exceptions\FilterException
      * @expectedExceptionMessage 2 is greater than 1
      */
     public function filterMaxValueFail()
