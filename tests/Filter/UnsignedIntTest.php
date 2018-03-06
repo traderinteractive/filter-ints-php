@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \TraderInteractive\Filter\UnsignedInt
+ * @covers ::<private>
  */
 final class UnsignedIntTest extends TestCase
 {
@@ -62,7 +63,7 @@ final class UnsignedIntTest extends TestCase
      * @test
      * @covers ::filter
      * @expectedException \TraderInteractive\Exceptions\FilterException
-     * @expectedExceptionMessage "NULL" $value is not a string
+     * @expectedExceptionMessage Value failed filtering, $allowNull is set to false
      */
     public function filterAllowNullFail()
     {

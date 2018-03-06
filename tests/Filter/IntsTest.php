@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \TraderInteractive\Filter\Ints
+ * @covers ::<private>
  */
 final class IntsTest extends TestCase
 {
