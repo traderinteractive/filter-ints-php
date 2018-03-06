@@ -114,28 +114,28 @@ final class Ints
         return $casted;
     }
 
-    private static function enforceMinimumValue(int $minValue, $valueInt)
+    private static function enforceMinimumValue(int $minValue = null, int $valueInt)
     {
         if ($minValue !== null && $valueInt < $minValue) {
             throw new FilterException("{$valueInt} is less than {$minValue}");
         }
     }
 
-    private static function enforceMaximumValue(int $maxValue, $valueInt)
+    private static function enforceMaximumValue(int $maxValue = null, int $valueInt)
     {
         if ($valueInt > $maxValue) {
             throw new FilterException("{$valueInt} is greater than {$maxValue}");
         }
     }
 
-    private static function enforcePhpIntMax(string $value, $casted)
+    private static function enforcePhpIntMax(string $value, int $casted)
     {
         if ($casted === PHP_INT_MAX && $value !== (string)PHP_INT_MAX) {
             throw new FilterException("{$value} was greater than a max int of " . PHP_INT_MAX);
         }
     }
 
-    private static function enforcePhpIntMin(string $value, $casted, $phpIntMin)
+    private static function enforcePhpIntMin(string $value, int $casted, int $phpIntMin)
     {
         if ($casted === $phpIntMin && $value !== (string)$phpIntMin) {
             throw new FilterException("{$value} was less than a min int of {$phpIntMin}");
