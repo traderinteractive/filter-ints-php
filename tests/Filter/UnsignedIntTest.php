@@ -25,9 +25,9 @@ final class UnsignedIntTest extends TestCase
      * @test
      * @covers ::filter
      */
-    public function filterMinValueNullSuccess()
+    public function filterMinValueDefaultSuccess()
     {
-        $this->assertSame(1, UnsignedInt::filter('1', false, null));
+        $this->assertSame(1, UnsignedInt::filter('1', false));
     }
 
     /**
@@ -36,9 +36,9 @@ final class UnsignedIntTest extends TestCase
      * @expectedException \TraderInteractive\Exceptions\FilterException
      * @expectedExceptionMessage -1 is less than 0
      */
-    public function filterMinValueNullFail()
+    public function filterMinValueDefaultFail()
     {
-        UnsignedInt::filter('-1', false, null);
+        UnsignedInt::filter('-1', false);
     }
 
     /**

@@ -24,11 +24,9 @@ final class UnsignedInt
      * @throws \InvalidArgumentException if minvalue is not greater or equal to zero.
      * @throws FilterException on failure to filter.
      */
-    public static function filter($value, bool $allowNull = false, int $minValue = null, int $maxValue = PHP_INT_MAX)
+    public static function filter($value, bool $allowNull = false, int $minValue = 0, int $maxValue = PHP_INT_MAX)
     {
-        if ($minValue === null) {
-            $minValue = 0;
-        } elseif (is_int($minValue) && $minValue < 0) {
+        if ($minValue < 0) {
             throw new \InvalidArgumentException("{$minValue} was not greater or equal to zero");
         }
 
