@@ -1,0 +1,27 @@
+{
+    "name": "traderinteractive/filter-ints",
+    "description": "A filtering implementation for verifying correct data and performing typical modifications to data",
+    "keywords": [
+        "integer",
+        "ints",
+        "int",
+        "unsigned",
+        "uint"
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "license": "MIT",
+    "require": {
+        "php": "^7.0",
+        "traderinteractive/exceptions": "^1.0"
+    },
+    "require-dev": {
+        "php-coveralls/php-coveralls": "^1.0",
+        "phpunit/phpunit": "^6.0",
+        "squizlabs/php_codesniffer": "^3.2"
+    },
+    "autoload": {
+        "psr-4": { "TraderInteractive\\": "src/" }
+    }
+}
