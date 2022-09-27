@@ -13,11 +13,11 @@ final class UnsignedIntTest extends TestCase
     /**
      * @test
      * @covers ::filter
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage -1 was not greater or equal to zero
      */
     public function filterMinValueNegative()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('-1 was not greater or equal to zero');
         UnsignedInt::filter('1', false, -1);
     }
 
@@ -33,11 +33,11 @@ final class UnsignedIntTest extends TestCase
     /**
      * @test
      * @covers ::filter
-     * @expectedException \TraderInteractive\Exceptions\FilterException
-     * @expectedExceptionMessage -1 is less than 0
      */
     public function filterMinValueDefaultFail()
     {
+        $this->expectException(\TraderInteractive\Exceptions\FilterException::class);
+        $this->expectExceptionMessage('-1 is less than 0');
         UnsignedInt::filter('-1', false);
     }
 
@@ -62,33 +62,33 @@ final class UnsignedIntTest extends TestCase
     /**
      * @test
      * @covers ::filter
-     * @expectedException \TraderInteractive\Exceptions\FilterException
-     * @expectedExceptionMessage Value failed filtering, $allowNull is set to false
      */
     public function filterAllowNullFail()
     {
+        $this->expectException(\TraderInteractive\Exceptions\FilterException::class);
+        $this->expectExceptionMessage('Value failed filtering, $allowNull is set to false');
         UnsignedInt::filter(null, false);
     }
 
     /**
      * @test
      * @covers ::filter
-     * @expectedException \TraderInteractive\Exceptions\FilterException
-     * @expectedExceptionMessage 0 is less than 1
      */
     public function filterMinValueFail()
     {
+        $this->expectException(\TraderInteractive\Exceptions\FilterException::class);
+        $this->expectExceptionMessage('0 is less than 1');
         $this->assertSame(1, UnsignedInt::filter('0', false, 1));
     }
 
     /**
      * @test
      * @covers ::filter
-     * @expectedException \TraderInteractive\Exceptions\FilterException
-     * @expectedExceptionMessage 2 is greater than 1
      */
     public function filterMaxValueFail()
     {
+        $this->expectException(\TraderInteractive\Exceptions\FilterException::class);
+        $this->expectExceptionMessage('2 is greater than 1');
         UnsignedInt::filter('2', false, 0, 1);
     }
 }
