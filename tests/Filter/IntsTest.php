@@ -73,33 +73,33 @@ final class IntsTest extends TestCase
     /**
      * @test
      * @covers ::filter
-     * @expectedException \TraderInteractive\Exceptions\FilterException
-     * @expectedExceptionMessage "true" $value is not a string
      */
     public function filterNonStringOrInt()
     {
+        $this->expectException(\TraderInteractive\Exceptions\FilterException::class);
+        $this->expectExceptionMessage('"true" $value is not a string');
         Ints::filter(true);
     }
 
     /**
      * @test
      * @covers ::filter
-     * @expectedException \TraderInteractive\Exceptions\FilterException
-     * @expectedExceptionMessage $value string length is zero
      */
     public function filterEmptyString()
     {
+        $this->expectException(\TraderInteractive\Exceptions\FilterException::class);
+        $this->expectExceptionMessage('$value string length is zero');
         Ints::filter('');
     }
 
     /**
      * @test
      * @covers ::filter
-     * @expectedException \TraderInteractive\Exceptions\FilterException
-     * @expectedExceptionMessage $value string length is zero
      */
     public function filterWhitespaceString()
     {
+        $this->expectException(\TraderInteractive\Exceptions\FilterException::class);
+        $this->expectExceptionMessage('$value string length is zero');
         Ints::filter('   ');
     }
 
@@ -124,10 +124,10 @@ final class IntsTest extends TestCase
     /**
      * @test
      * @covers ::filter
-     * @expectedException \TraderInteractive\Exceptions\FilterException
      */
     public function filterGreaterThanPhpIntMax()
     {
+        $this->expectException(\TraderInteractive\Exceptions\FilterException::class);
         //32, 64 and 128 bit and their +1 's
         $maxes = [
             '2147483647' => '2147483648',
@@ -141,10 +141,10 @@ final class IntsTest extends TestCase
     /**
      * @test
      * @covers ::filter
-     * @expectedException \TraderInteractive\Exceptions\FilterException
      */
     public function filterLessThanPhpIntMin()
     {
+        $this->expectException(\TraderInteractive\Exceptions\FilterException::class);
         //32, 64 and 128 bit and their -1 's
         $mins = [
             '-2147483648' => '-2147483649',
@@ -158,11 +158,11 @@ final class IntsTest extends TestCase
     /**
      * @test
      * @covers ::filter
-     * @expectedException \TraderInteractive\Exceptions\FilterException
-     * @expectedExceptionMessage -1 is less than 0
      */
     public function filterLessThanMin()
     {
+        $this->expectException(\TraderInteractive\Exceptions\FilterException::class);
+        $this->expectExceptionMessage('-1 is less than 0');
         Ints::filter(-1, false, 0);
     }
 
@@ -178,11 +178,11 @@ final class IntsTest extends TestCase
     /**
      * @test
      * @covers ::filter
-     * @expectedException \TraderInteractive\Exceptions\FilterException
-     * @expectedExceptionMessage 1 is greater than 0
      */
     public function filterGreaterThanMax()
     {
+        $this->expectException(\TraderInteractive\Exceptions\FilterException::class);
+        $this->expectExceptionMessage('1 is greater than 0');
         Ints::filter(1, false, null, 0);
     }
 
